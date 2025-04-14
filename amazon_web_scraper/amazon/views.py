@@ -1,5 +1,9 @@
 ## Imports
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from urllib.parse import quote_plus
+
+
 
 ## View functions
 # View for the initial welcome page. Basically
@@ -23,4 +27,25 @@ def get_search(request):
 # error page.
 def display_results(request):
 
+    # Get the search from user
+    if request.method == 'POST':
+        search = request.POST.get('search_query,' '')
 
+        # Formulate the search
+        formatted_search = quote_plus(search)
+
+
+        # Error Checking
+
+
+        # Encode the URL
+        url = f"https://www.amazon.com/s?k={formatted_search}"
+
+        # Display results
+        return render(request, 'amazon_task1/results_page.html', {
+            'search': search,
+            'URL': url
+        })
+    
+    # Else
+    return redirect('amazon_task1/search_page.html')
