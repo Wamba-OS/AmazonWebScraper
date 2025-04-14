@@ -1,0 +1,29 @@
+## Git ignore file for django project 
+
+# Virtual Environemnt
+amazon_venv/
+
+# Python extra
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local development settings
+.env
+.env.local
+
+# Database
+db.sqlite3
+db.sqlite3-journal
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
