@@ -1,72 +1,55 @@
+<!-- amazon_task1/results_page.html -->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Your Amazon Link</title>
+    <title>Amazon Search Results</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            text-align: center;
         }
-        .results-container {
-            margin-top: 100px;
+        .result-container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
         }
         .amazon-link {
-            margin: 20px 0;
-            padding: 15px;
-            background-color: #f0f0f0;
-            border-radius: 4px;
             word-break: break-all;
+            background-color: #eee;
+            padding: 10px;
+            border-radius: 3px;
+            margin: 15px 0;
         }
-        .amazon-button {
-            background-color: #FF9900;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            text-decoration: none;
+        .button {
             display: inline-block;
-            margin: 10px;
+            background-color: #ff9900;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 3px;
+            margin-right: 10px;
         }
         .back-button {
             background-color: #555;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            margin: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="results-container">
-        <h1>Your Amazon Search Link</h1>
+    <h1>Amazon Search Results</h1>
+    
+    <div class="result-container">
+        <p>You searched for: <strong>{{ search }}</strong></p>
         
-        <p>You searched for: <strong>{{ search_query }}</strong></p>
-        
+        <p>Here's your Amazon search URL:</p>
         <div class="amazon-link">
-            <p>{{ amazon_url }}</p>
+            {{ URL }}
         </div>
         
-        <a href="{{ amazon_url }}" target="_blank" class="amazon-button">
-            Open in Amazon
-        </a>
-        
-        <a href="{% url 'search_input' %}" class="back-button">
-            New Search
-        </a>
-        
-        <a href="{% url 'welcome' %}" class="back-button">
-            Back to Home
-        </a>
+        <a href="{{ URL }}" target="_blank" class="button">Open in Amazon</a>
+        <a href="{% url 'get_search' %}" class="button back-button">New Search</a>
     </div>
 </body>
 </html>

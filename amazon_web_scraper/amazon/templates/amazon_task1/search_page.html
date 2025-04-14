@@ -1,51 +1,56 @@
-<!DOCTYPE html> 
-<html>  
-    
-<head>     
-    <title>Welcome to the Amazon search engine</title>     
-    <style>         
-        body {             
-            font-family: Arial, sans-serif;             
-            max-width: 600px;             
-            margin: 0 auto;             
-            padding: 20px;         
-        }         
-        
-        form {             
-            background-color: #f8f9fa;             
-            padding: 20px;             
-            border-radius: 5px;         
-        }         
-        
-        button {             
-            background-color: #ff9900;             
-            color: white;             
-            border: none;             
-            padding: 10px 15px;             
-            border-radius: 3px;             
-            cursor: pointer;         
-        }         
-        
-        input[type="text"] {             
-            width: 100%;             
-            padding: 8px;             
-            margin: 10px 0;             
-            box-sizing: border-box;         
-        }     
-        
-    </style> 
-</head>  
-
+<!-- amazon_task1/search_page.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to the Amazon search engine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        form {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
 <body>
-    <div class="search-container">
-        <h1>What would you like to search for?</h1>
+    <h1>Amazon Search</h1>
+    <p>Enter your search term below to generate an Amazon search URL.</p>
+    
+    <form method="post" action="{% url 'results' %}">
+        {% csrf_token %}
         
-        <form action="{% url 'results' %}" method="post">
-            {% csrf_token %}
-            <input type="text" name="search_query" class="search-input" placeholder="Enter your search " required>
-            <br>
-            <button type="submit" class="search-button">Generate Amazon Link</button>
-        </form>
-    </div>
+        {% if form.errors %}
+            <div class="error-message">
+                Please correct the errors below.
+            </div>
+        {% endif %}
+        
+        {{ form.as_p }}
+        
+        <button type="submit">Generate Amazon URL</button>
+    </form>
 </body>
 </html>

@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from urllib.parse import quote_plus
+from .forms import SearchForm
 
 
 
@@ -9,7 +10,7 @@ from urllib.parse import quote_plus
 # View for the initial welcome page. Basically
 # it just displays the view.
 def welcome(request):
-    return render(request, 'amazon_task1/welcome_template.html')
+    return render(request, 'amazon_task1/welcome_page.html')
 
 
 
@@ -18,7 +19,8 @@ def welcome(request):
 # View for the page getting the user's search. 
 # Returns the search template
 def get_search(request):
-    return render(request, 'amazon_task1/search_page.html')
+    form = SearchForm()
+    return render(request, 'amazon_task1/search_page.html', {'form': form})
 
 
 # Need to do error checking and eventually 
@@ -27,25 +29,34 @@ def get_search(request):
 # error page.
 def display_results(request):
 
+
     # Get the search from user
     if request.method == 'POST':
-        search = request.POST.get('search_query,' '')
 
-        # Formulate the search
-        formatted_search = quote_plus(search)
+        form = SearchForm(request.POST)
+
+        # Validate form
+        if form.is_valid():
+            search = form.cleaned_data['search']
+
+            # Formulate the search
+            formatted_search = quote_plus(search)
 
 
-        # Error Checking
+            # Error Checking
 
 
-        # Encode the URL
-        url = f"https://www.amazon.com/s?k={formatted_search}"
+            # Encode the URL
+            url = f"https://www.amazon.com/s?k={formatted_search}"
 
-        # Display results
-        return render(request, 'amazon_task1/results_page.html', {
-            'search': search,
-            'URL': url
-        })
+            # Display results
+            return render(request, 'amazon_task1/results_page.html', {
+                'search': search,
+                'URL': url
+            })
+        
+        # Else if form is invalid
+        return render(request, 'amazon_task1/search_page.html', {'form': form})
     
-    # Else
-    return redirect('amazon_task1/search_page.html')
+    # Else if no search
+    return redirect('search')
