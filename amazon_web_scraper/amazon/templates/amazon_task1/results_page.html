@@ -1,4 +1,3 @@
-<!-- amazon_task1/results_page.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +13,6 @@
             background-color: #f8f9fa;
             padding: 20px;
             border-radius: 5px;
-            margin-top: 20px;
         }
         .amazon-link {
             word-break: break-all;
@@ -35,6 +33,14 @@
         .back-button {
             background-color: #555;
         }
+        .warning-message {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 3px;
+            margin: 15px 0;
+            border-left: 4px solid #ffeeba;
+        }
     </style>
 </head>
 <body>
@@ -42,6 +48,12 @@
     
     <div class="result-container">
         <p>You searched for: <strong>{{ search }}</strong></p>
+        
+        {% if warning_enabled %}
+        <div class="warning-message">
+            <strong>Note:</strong> {{ special_chars_warning }}
+        </div>
+        {% endif %}
         
         <p>Here's your Amazon search URL:</p>
         <div class="amazon-link">
