@@ -1,10 +1,10 @@
 # Instructions
 
-# 1.) download github reposiatary.
+# Download github reposiatary.
 git clone https://github.com/Wamba-OS/AmazonWebScraper
 
 # Set your active directory
-"\AmazonWebScraper\amazon_web_scraper\manage.py"
+"\AmazonWebScraper\amazon_web_scraper\"
 
 # Run command to launch site.
 python manage.py runserver
