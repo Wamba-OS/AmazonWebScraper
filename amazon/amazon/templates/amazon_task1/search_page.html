@@ -1,0 +1,158 @@
+<!-- amazon_task1/search_page.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to the Amazon search engine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        form {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+        }
+        .filter-container {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .filter-container h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .filter-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            height: 36px; /* Ensure all inputs have exactly the same height */
+            font-size: 14px; /* Ensure consistent font size */
+            line-height: 1.2; /* Ensure consistent line height */
+        }
+
+        .search-field {
+            margin-bottom: 15px;
+        }
+
+        .search-field label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        
+        
+        
+    </style>
+</head>
+<body>
+    <h1>Amazon Search</h1>
+    <p>Enter your search term below to generate an Amazon search URL.</p>
+    
+    <form method="post" action="{% url 'results' %}">
+        {% csrf_token %}
+    
+        {% if form.errors %}
+            <div class="error-message">
+                Please correct the errors below.
+            </div>
+        {% endif %}
+    
+        <div class="search-field">
+            <label for="{{ form.search.id_for_label }}">Search</label>
+            {{ form.search }}
+        </div>
+        
+        <div class="filter-container">
+            <h3>Filters</h3>
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <label for="{{ form.min_price.id_for_label }}">Min Price ($)</label>
+                    <input type="number" name="min_price" id="{{ form.min_price.id_for_label }}" placeholder="0">
+                </div>
+                <div class="filter-group">
+                    <label for="{{ form.max_price.id_for_label }}">Max Price ($)</label>
+                    <input type="number" name="max_price" id="{{ form.max_price.id_for_label }}" placeholder="1000">
+                </div>
+                <div class="filter-group">
+                    <label for="{{ form.company.id_for_label }}">Brand/Company</label>
+                    <input type="text" name="company" id="{{ form.company.id_for_label }}" placeholder="e.g., Apple, Samsung, Dell">
+                </div>
+                <div class="filter-group">
+                    <label for="{{ form.category.id_for_label }}">Category</label>
+                    <select name="category" id="{{ form.category.id_for_label }}">
+                        <option value="">All Categories</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="books">Books</option>
+                        <option value="fashion">Fashion</option>
+                        <option value="toys">Toys</option>
+                        <option value="home">Home</option>
+                        <option value="kitchen">Kitchen</option>
+                        <option value="beauty">Beauty</option>
+                        <option value="sports">Sports & Outdoors</option>
+                        <option value="automotive">Automotive</option>
+                        <option value="health">Health & Household</option>
+                        <option value="grocery">Grocery</option>
+                        <option value="tools">Tools & Home Improvement</option>
+                        <option value="garden">Garden & Outdoor</option>
+                        <option value="baby">Baby</option>
+                        <option value="pets">Pet Supplies</option>
+                        <option value="office">Office Products</option>
+                        <option value="music">CDs & Vinyl</option>
+                        <option value="movies">Movies & TV</option>
+                        <option value="games">Video Games</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <button type="submit">Generate Amazon URL</button>
+    </form>
+    
+</body>
+</html>

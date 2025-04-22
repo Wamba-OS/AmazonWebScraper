@@ -1,0 +1,65 @@
+<!-- amazon_task1/results_page.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Amazon Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .result-container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .amazon-link {
+            word-break: break-all;
+            background-color: #eee;
+            padding: 10px;
+            border-radius: 3px;
+            margin: 15px 0;
+        }
+        .button {
+            display: inline-block;
+            background-color: #ff9900;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+        .back-button {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Amazon Search Results</h1>
+    
+    <div class="result-container">
+        <p>You searched for: <strong>{{ search }}</strong></p>
+        
+        {% if min_price or max_price or category %}
+            <p>With filters:</p>
+            <ul>
+                {% if min_price %}<li>Min Price: ${{ min_price }}</li>{% endif %}
+                {% if max_price %}<li>Max Price: ${{ max_price }}</li>{% endif %}
+                {% if category %}<li>Category: {{ category|title }}</li>{% endif %}
+                {% if company %}<li>Brand/Company: {{ company }}</li>{% endif %}
+            </ul>
+        {% endif %}
+        
+        <p>Here's your Amazon search URL:</p>
+        <div class="amazon-link">
+            {{ URL }}
+        </div>
+        
+        <a href="{{ URL }}" target="_blank" class="button">Open in Amazon</a>
+        <a href="{% url 'get_search' %}" class="button back-button">New Search</a>
+    </div>
+</body>
+</html>

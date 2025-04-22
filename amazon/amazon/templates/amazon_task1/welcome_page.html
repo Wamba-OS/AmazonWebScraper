@@ -1,0 +1,47 @@
+<!-- amazon_task1/welcome_page.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to Amazon URL Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .welcome-container {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 5px;
+            margin-top: 50px;
+        }
+        .search-button {
+            display: inline-block;
+            background-color: #ff9900;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 3px;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-container">
+        <h1>Welcome to Amazon URL Generator</h1>
+        <p>This tool helps you quickly generate Amazon search links from your queries.</p>
+        <p>Simply click the button below to start your search!</p>
+        <p>
+            Enter your search query to generate an Amazon search URL.
+            This tool helps you quickly generate Amazon search URLs from your search queries.
+            We are working on functionality for applying filters and displaying results here instead of amazon!
+        </p>
+        
+        <a href="{% url 'get_search' %}" class="search-button">Start Searching</a>
+    </div>
+</body>
+</html>
+        
