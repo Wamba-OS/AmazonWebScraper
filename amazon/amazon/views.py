@@ -38,6 +38,20 @@ def display_results(request):
         max_price_str = request.POST.get('max_price', '')
         category = request.POST.get('category', '')
         company = request.POST.get('company', '')
+
+        warning_enabled = False
+        special_chars_warning = ""
+
+         # Validate search term
+        if not check_alphanumeric(search):
+            warning_enabled = True
+            special_chars_warning = "Your search contains special characters which may affect results."
+        
+        if not check_for_word(search):
+            return render(request, 'amazon_task1/search_page.html', {
+                'form': SearchForm(initial={'search': search}),
+                'error_message': "Search must contain at least one letter."
+            })
         
         # Convert price strings to integers if they're not empty
         min_price = None
@@ -114,7 +128,9 @@ def display_results(request):
             'max_price': max_price,
             'category': category,
             'company': company,
-            'URL': url
+            'URL': url,
+            'warning_enabled': warning_enabled,
+            'special_chars_warning': special_chars_warning
         })
     
     # GET request
