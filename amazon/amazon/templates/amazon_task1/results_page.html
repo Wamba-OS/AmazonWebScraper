@@ -42,6 +42,12 @@
     
     <div class="result-container">
         <p>You searched for: <strong>{{ search }}</strong></p>
+
+        {% if warning_enabled %}
+         <div class="warning-message">
+        <strong>Note:</strong> {{ special_chars_warning }}
+        </div>
+        {% endif %}
         
         {% if min_price or max_price or category %}
             <p>With filters:</p>
