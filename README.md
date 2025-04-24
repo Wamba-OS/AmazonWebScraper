@@ -7,10 +7,11 @@ git clone https://github.com/Wamba-OS/AmazonWebScraper
 
 2. Set your active directory to wherever you installed the repository
 
-3. Activate virtual environment (either yours or the one in the repository): "amazon_venv\Scripts\activate"
+3. Navigate to the Django project folder:
+"cd AmazonWebScraper"
 
-4. Navigate to the Django project folder:
-"cd amazon_web_scraper"
+4. Install Django locally (or use a virtual environment):
+"pip install -r requirements.txt"
 
 5. Run command to launch site:
 "python manage.py runserver"
