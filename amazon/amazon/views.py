@@ -5,6 +5,22 @@ from urllib.parse import quote_plus
 from .forms import SearchForm
 
 
+## Extra functions
+# Function for checking user input so we have test cases
+def check_alphanumeric(string):
+    for char in string:
+        if not (char.isalnum() or char.isspace()):
+            return False
+    return True
+
+# Function to check if there is at least one character
+def check_for_word(string):
+    for letter in string:
+        if letter.isalpha():
+            return True
+    return False
+
+
 
 ## View functions
 # View for the initial welcome page. Basically
